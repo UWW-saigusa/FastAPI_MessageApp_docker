@@ -3,11 +3,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-# SQLiteによって作成されるファイル形式のDB（test.db）へのパスを指定
-SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
+# DBの接続情報を設定
+SQLALCHEMY_DATABASE_URL = "postgresql://postgres:postgres@postgres"
 
 # SQLAlchemyにDBへの接続を指示。さらに複数のスレッドでの接続を許可。
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 # DBセッションを管理するためのセッションファクトリを作成
 # autocommit=False, autoflush=False は、セッションが自動的にコミットされないようにするための設定

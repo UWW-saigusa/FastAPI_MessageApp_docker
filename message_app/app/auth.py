@@ -4,7 +4,7 @@ from passlib.context import CryptContext
 from message_app import settings
 
 SECRET_KEY = settings.SECRET_KEY
-ALRORITHM = "HS256"
+ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -31,7 +31,7 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
     else:
         expire = datetime.now() + timedelta(minutes=15)
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALRORITHM)
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
 # アクセストークンの検証
@@ -39,7 +39,7 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
 
 def verify_token(token: str):
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALRORITHM])
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         return payload
     except JWTError:
         return None
